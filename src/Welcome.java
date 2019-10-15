@@ -1,3 +1,5 @@
+
+
 /**
  * This class is the main class of the "Pursuit" application.
  * "Pursuit" is a very simple, text based to do list.  Users
@@ -13,90 +15,99 @@
  * @version 2019
  */
 
-public class Welcome {
+public class Welcome
+{
+    private Parser parser;
+    private ListController listController;
+    private Print print;
 
-    static Parser parser;
+
 
     /**
      * Create the Pursuit and initialise it.
      */
-    public Welcome() {
+    public Welcome()
+    {
         parser = new Parser();
-        System.out.println("eeeeeee");   //testing
+        listController = new ListController();
+        print = new Print();
     }
-             
-        /**
-         *  Main start routine.
-         */
-        public void start(){
-            Print.printWelcome();
-            // Enter the main command loop.  Here we repeatedly read commands and
-            // execute them until the user quit.
-            boolean finished = false;
-            while (!finished){
-                Command command = parser.getCommand();
-                 finished = processCommand(command);
-            }
-            Print.printBye();
+
+
+
+    /**
+     *  Main start routine.
+     */
+    public void start()
+    {
+        print.printWelcome();
+
+        // Enter the main command loop.  Here we repeatedly read commands and execute them until the user quit.
+        boolean finished = false;
+        while (!finished)
+        {
+            Command command = parser.getCommand();
+            finished = processCommand(command);
         }
+        print.printBye();
+    }
+
+
+    /**
+     * "Quit" was entered.
+     * @return true, if this command quits the game, false otherwise.
+     */
+    public boolean saveAndQuit(Command command)
+    {
+        if(command.hasSecondWord())
+        {
+            print.printQuitError(); return false;
+        }
+        else
+            {
+                return true;
+            }
+    }
+
+
 
         /**
          * Given a command, process (that is: execute) the command.
          * @param command The command to be processed.
          * @return true If the command ends the application, false otherwise.
          */
-        private boolean processCommand(Command command) {
-
+        private boolean processCommand(Command command)
+        {
             boolean wantToQuit = false;                //use it to return false after the switch.
             CommandWord commandWord = command.getCommandWord();
-            switch (commandWord) {
+            switch (commandWord)
+            {
                 case SHOWTASKLIST:
-
                     break;
-
                 case ADDNEWTASK:
-
+                    listController.addTask();
+                    print.printAddTaskDetails();
+                    //parser.readTaskDetails();
                     break;
-
                 case EDITTASK:
-
                     break;
-
                 case SAVEANDQUIT:
-
+                    saveAndQuit(command);
                     break;
-
                 case HELP:
-                    Print.printHelp();
+                    print.printHelp();
                     break;
-
                 case UNKNOWN:
-                    Print.printUnkown();
-
+                    print.printUnkown();
                     break;
             }
-
             return wantToQuit;
         }
 
-    public static void main(String[] args) {  }
-
-    
-
-
-
-
-
-
-    
-    //Parser parser = new Parser();
-    //String str = parser.readString();
-    //CommandWord commandKey = CommandWord.fromString(str);
-    //System.out.println(commandKey);
-
-    //Show a member of the HashMap.
-    //CommandWord[] command = CommandWord.values();
-    //System.out.println(command[0].name() + "( " + command[0].toString() + " )");
-
+    public static void main(String[] args)
+    {
+        Welcome welcome = new Welcome();
+        welcome.start();
+    }
 }
 

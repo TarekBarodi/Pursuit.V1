@@ -11,26 +11,37 @@ public enum CommandWord {
     //The command string.
     private String commandString;
 
+
+
     /**
      * Initialise the command string.
      * @param commandString The command string.
      */
-    CommandWord(String commandString) {
+    CommandWord(String commandString)
+    {
         this.commandString = commandString;
     }
+
+
 
     /**
      * Method for the init constructor of CommandWords
      * To add the commandString to the HashMap.
      * @return The key of command word as a string.
      */
-    public String toString() {
+    public String toString()
+    {
         return commandString;
     }
 
-    public static CommandWord fromString(String commandIn) {
-        for (CommandWord command : CommandWord.values()) {
-            if (command.commandString.equalsIgnoreCase(commandIn)) {
+
+
+    public static CommandWord fromString(String commandIn)
+    {
+        for (CommandWord command : CommandWord.values())
+        {
+            if (command.commandString.equalsIgnoreCase(commandIn))
+            {
                 return command;
             }
         }

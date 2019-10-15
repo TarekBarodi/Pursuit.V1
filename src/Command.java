@@ -4,31 +4,43 @@
  * "Pursuit" is a very simple, text based to do list.
  *
  * This class holds information about a command that was issued by the user.
- * A command currently consists of one part: a CommandWord and a string.
+ * A command currently consists of two parts: a CommandWord and a string
+ * (for example, if the command was "take map", then the two parts
+ * are TAKE and "map").
  *
  * The way this is used is: Commands are already checked for being valid
  * command words. If the user entered an invalid command (a word that is not
  * known) then the CommandWord is UNKNOWN.
  *
+ * If the command had only one word, then the second word is <null>.
+ *
  * @author  Tarek Barodi
  * @version 2019
  */
 
-public class Command {
-
+public class Command
+{
     private CommandWord commandWord;
+    private String secondWord;
+
+
 
     /**
-     * Create a command object. First word must be supplied, but
-     * the second word must be null.
+     * Create a command object. First and second words must be supplied, but
+     * the second may be null.
      * @param commandWord The CommandWord. UNKNOWN if the command word
      * was not recognised.
-     */
-    public Command(CommandWord commandWord) {
+     * @param secondWord The second word of the command. May be null.
+     **/
+    public Command(CommandWord commandWord, String secondWord)
+    {
         this.commandWord = commandWord;
+        this.secondWord = secondWord  ;
     }
 
-    /*
+
+
+    /**
      * Return the command word (the first word) of this command.
      * @return The command word.
      */
@@ -37,14 +49,36 @@ public class Command {
         return commandWord;
     }
 
+
+
+
+    /**
+     * @return The second word of this command. Returns null if there was no
+     * second word.
+     */
+    public String getSecondWord()
+    {
+        return secondWord;
+    }
+
+
+
     /**
      * @return true is this common was not understood.
      */
-    public boolean isUnkown(){
+    public boolean isUnkown()
+    {
         return (commandWord == CommandWord.UNKNOWN);
     }
 
 
 
+    /**
+     * @return true if the command has a second word.
+     */
+    public boolean hasSecondWord()
+    {
+        return (secondWord != null);
+    }
 
 }

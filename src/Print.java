@@ -8,13 +8,22 @@
  * @version 2019.02.29
  */
 
-public class Print {
+public class Print
+{
+    private Parser parser;
+
+
+    public Print()
+    {
+        parser = new Parser();
+    }
+
 
 
     /**
      * Print out the opening message for the player.
      */
-    static void printWelcome(){
+    public void printWelcome(){
 
         System.out.println("\n Welcome to Pursuit" +
                            "\n ================== " +
@@ -27,11 +36,11 @@ public class Print {
         System.out.println("\n ============================================ ");
     }
 
-    static void printBye(){
+    public void printBye(){
         System.out.println("Thank you for using Pursuit, Good Bye");
     }
 
-    static void printUnkown(){
+    public void printUnkown(){
         System.out.println("I don't know what you mean..., Please read the Welcome list and pick one an option");
     }
 
@@ -44,7 +53,7 @@ public class Print {
     }
     */
 
-    static void printHelp(){
+    public void printHelp(){
         System.out.println("\n Welcome to Pursuit" +
                            "\n Simply use the keyboard to type a number or " +
                            "\n a word which equal to that want to do and in  " +
@@ -53,4 +62,25 @@ public class Print {
         //showCommands();
     }
 
+    public void printQuitError() {
+        System.out.println("\n Quit as a command word should contain only one word which is Quit");
+    }
+
+    public void printAddTaskDetails() {
+        System.out.println("\n Please enter the Title of the task: ");
+        parser.readTaskDetails();
+        String title = parser.readTaskDetails();
+
+        System.out.println("\n Please enter the Title of the Description: ");
+        parser.readTaskDetails();
+        String Description = parser.readTaskDetails();
+
+        System.out.println("\n Please enter the Title of the Project: ");
+        parser.readTaskDetails();
+        String Project = parser.readTaskDetails();
+
+        System.out.println("\n Please enter the Title of the Due Date: ");
+        parser.readTaskDetails();
+        String DueDate = parser.readTaskDetails();
+    }
 }
