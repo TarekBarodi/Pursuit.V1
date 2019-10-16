@@ -64,7 +64,7 @@ public class Parser
     }
 
 
-    public String readTaskDetails()
+    public String getInput()
     {
         return reader.nextLine();
     }

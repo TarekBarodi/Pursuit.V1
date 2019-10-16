@@ -2,20 +2,31 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class ListController
+public class TaskList
 {
-    private ArrayList<Task> tasks;
+    private ArrayList<Task> tasksList;
 
-
-    public void addTask()
+    /**
+     * Constructor initiate the taskList Array List to be ready to receive the new tasks.
+     */
+    public TaskList()
     {
-        //read line from user
-        Task task = new Task("titleFromUser", "descriptionFromUser", "my project", new Date(), true);
-        //TODO: look into SimpleDateFormat or whatever it's called
-        tasks = new ArrayList<>();    //init the arraylist to be ready to receive items and it could be done using the constructor
-        tasks.add(task);
-
+        tasksList = new ArrayList<>();
     }
+
+
+    public void addTask(String title, String description, String project, Date date, String dueDate, boolean status)
+    {
+        Task task = new Task(title, description, project, date, dueDate, status);
+        tasksList.add(task);
+
+
+        //tasks = new ArrayList<>();    better to using the constructor here because we want to create only once and only one ArrayList
+        //TODO: look into SimpleDateFormat or whatever it's called
+    }
+
+
+
 
 
     public boolean editTask(int taskID)
@@ -38,7 +49,7 @@ public class ListController
 
     public void showByDate()
     {
-        List<Task> sortedTasks = tasks.stream()
+        List<Task> sortedTasks = tasksList.stream()
                 .sorted(Comparator.comparing(Task::getDate))
                 .collect(Collectors.toList());
 
@@ -55,7 +66,7 @@ public class ListController
     public void showByProject()
     {
         //TODO: look into streams for grouping
-        List<Task> sortedTasks = tasks.stream()
+        List<Task> sortedTasks = tasksList.stream()
                 .sorted(Comparator.comparing(Task::getProject))
                 .collect(Collectors.toList());
 

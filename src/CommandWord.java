@@ -6,7 +6,7 @@
 public enum CommandWord {
     // A value for each command word along with its
     // corresponding user interface string.
-    SHOWTASKLIST("1"), ADDNEWTASK("2"), EDITTASK("3"), SAVEANDQUIT("4"), HELP("help"), UNKNOWN("?");
+    SHOWTASKLIST("1"), ADDNEWTASK("2"), EDITTASK("3"), SAVEANDQUIT("4"), HELP("5"), UNKNOWN("?");
 
     //The command string.
     private String commandString;
