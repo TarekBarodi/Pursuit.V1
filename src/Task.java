@@ -1,19 +1,40 @@
 import java.util.Date;
 
+/**
+ * This class is part of the "Pursuit" application.
+ * "Pursuit" is a very simple, text based To Do List.
+ *
+ * This Task class creating a new task each time and using parameters.
+ *
+ * @author  Tarek Barodi
+ * @version 2019.02.29
+ */
+
 public class Task
 {
     private String title;
     private String description;
     private String project;
     private Date date;
+    private String dueDate;
     private Boolean status;
 
 
-    public Task(String title, String description, String project, Date date, Boolean status) {
+    /**
+     * Constructor creating a new task every time using the below parameters.
+     * @param title
+     * @param description
+     * @param project
+     * @param date
+     * @param dueDate
+     * @param status
+     */
+    public Task(String title, String description, String project, Date date, String dueDate, Boolean status) {
         this.title = title;
         this.description = description;
         this.project = project;
         this.date = date;
+        this.dueDate = dueDate;
         this.status = status;
     }
 
@@ -49,6 +70,13 @@ public class Task
         this.date = date;
     }
 
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
 
     public Boolean getStatus() {
         return status;

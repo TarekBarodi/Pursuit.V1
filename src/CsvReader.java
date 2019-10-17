@@ -11,7 +11,7 @@ public class CsvReader
 {
     List <Task> tasks = new ArrayList<>();
 
-    Path path = new Path("src/TaskFile.csv");  ///Users/tarekbarodi/Desktop/Pursuit.V1/src/TaskFile.csv
+    Path path = new Path("src/TaskFile.csv");  // /Users/tarekbarodi/Desktop/Pursuit.V1/src/TaskFile.csv
 
     for
     {
