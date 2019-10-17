@@ -1,3 +1,7 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,7 +19,7 @@ public class TaskList
     }
 
 
-    public void addTask(String title, String description, String project, Date date, String dueDate, boolean status)
+    public void addTask(String title, String description, String project, Date date, LocalDate dueDate, boolean status)
     {
         Task task = new Task(title, description, project, date, dueDate, status);
         tasksList.add(task);
@@ -26,7 +30,20 @@ public class TaskList
     }
 
 
+    public LocalDate stringToDate(String date)
+    {
+        try
+        {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.mm.yyyy");
+            LocalDate ld = LocalDate.parse(date, dtf);
+            return ld;
+        }
+        catch (DateTimeParseException e)
+        {
+            return null;
+        }
 
+    }
 
 
     public boolean editTask(int taskID)

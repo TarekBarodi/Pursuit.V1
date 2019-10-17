@@ -1,4 +1,8 @@
+import java.awt.*;
+import java.awt.font.GraphicAttribute;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -16,35 +20,29 @@ import java.util.Date;
  * @version 2019
  */
 
-public class Interface
-{
-    private Parser         parser        ;
-    private TaskList       taskList      ;
-
+public class Interface {
+    private Parser parser;
+    private TaskList taskList;
 
 
     /**
      * Create the Pursuit and initialise it.
      */
-    public Interface()
-    {
-        parser   = new Parser()  ;
+    public Interface() {
+        parser = new Parser();
         taskList = new TaskList();
     }
-    
-    
+
 
     /**
-     *  Main start routine.
+     * Main start routine.
      */
-    public void start()
-    {
+    public void start() {
         printWelcome();
 
         // Enter the main command loop.  Here we repeatedly read commands and execute them until the user quit.
         boolean finished = false;
-        while (!finished)
-        {
+        while (!finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
@@ -54,58 +52,56 @@ public class Interface
 
     /**
      * "Quit" was entered.
+     *
      * @return true, if this command quits the game, false otherwise.
      */
-    public boolean saveAndQuit(Command command)
-    {
-        if(command.hasSecondWord())
-        {
-            printQuitError(); return false;
+    public boolean saveAndQuit(Command command) {
+        if (command.hasSecondWord()) {
+            printQuitError();
+            return false;
+        } else {
+            return true;
         }
-        else
-            {
-                return true;
-            }
     }
 
 
+    /**
+     * Given a command, process (that is: execute) the command.
+     *
+     * @param command The command to be processed.
+     * @return true If the command ends the application, false otherwise.
+     */
+    private boolean processCommand(Command command) {
+        boolean wantToQuit = false;                //use it to return false after the switch.
+        CommandWord commandWord = command.getCommandWord();
+        switch (commandWord) {
+            case SHOWTASKLIST:
+                showTaskList();
+                break;
 
-        /**
-         * Given a command, process (that is: execute) the command.
-         * @param command The command to be processed.
-         * @return true If the command ends the application, false otherwise.
-         */
-        private boolean processCommand(Command command)
-        {
-            boolean wantToQuit = false;                //use it to return false after the switch.
-            CommandWord commandWord = command.getCommandWord();
-            switch (commandWord)
-            {
-                case SHOWTASKLIST:
-                    showTaskList();
-                    break;
+            case ADDNEWTASK:
+                printParserAddTaskDetails();
+                break;
 
-                case ADDNEWTASK:
-                    printParserAddTaskDetails();
-                    break;
+            case EDITTASK:
+                break;
 
-                case EDITTASK:
-                    break;
+            case SAVEANDQUIT:
+                saveAndQuit(command);
+                break;
 
-                case SAVEANDQUIT:
-                    saveAndQuit(command);
-                    break;
+            case HELP:
+                printHelp();
+                break;
 
-                case HELP:
-                    printHelp();
-                    break;
-
-                case UNKNOWN:
-                    printUnkown();
-                    break;
-            }
-            return wantToQuit;
+            case UNKNOWN:
+                printUnkown();
+                break;
         }
+        return wantToQuit;
+    }
+
+
 
 
     /**
@@ -181,9 +177,7 @@ public class Interface
 
         System.out.println("\n Please enter the Title of the Due Date: ");
         String dueDate = parser.getInput();
-        // creating a simpleDateFormat object by passing the data pattern.
-        // pass the date string to simpleDateFormat parse method.
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss").parse("31/12/1998");
+        LocalDate dd = taskList.stringToDate(dueDate);
 
 
         // status pending by default

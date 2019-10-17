@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -16,7 +17,7 @@ public class Task
     private String description;
     private String project;
     private Date date;
-    private String dueDate;
+    private LocalDate dueDate;
     private Boolean status;
 
 
@@ -29,7 +30,7 @@ public class Task
      * @param dueDate
      * @param status
      */
-    public Task(String title, String description, String project, Date date, String dueDate, Boolean status) {
+    public Task(String title, String description, String project, Date date, LocalDate dueDate, Boolean status) {
         this.title = title;
         this.description = description;
         this.project = project;
@@ -70,11 +71,11 @@ public class Task
         this.date = date;
     }
 
-    public String getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
