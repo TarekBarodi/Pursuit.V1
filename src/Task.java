@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
-/**
+/***
  * This class is part of the "Pursuit" application.
  * "Pursuit" is a very simple, text based To Do List.
  *
@@ -11,79 +12,126 @@ import java.util.Date;
  * @version 2019.02.29
  */
 
-public class Task
+public class Task implements Serializable
 {
-    private String title;
-    private String description;
-    private String project;
-    private Date date;
-    private LocalDate dueDate;
-    private Boolean status;
+    public String title;
+    public String description;
+    public String project;
+    public Date date;
+    public LocalDate dueDate;
+    public Boolean pending = true;
 
 
-    /**
+    /***
      * Constructor creating a new task every time using the below parameters.
      * @param title
      * @param description
      * @param project
      * @param date
      * @param dueDate
-     * @param status
+     * @param pending
      */
-    public Task(String title, String description, String project, Date date, LocalDate dueDate, Boolean status) {
+
+    public Task(String title, String description, String project, Date date, LocalDate dueDate, Boolean pending)
+    {
         this.title = title;
         this.description = description;
         this.project = project;
         this.date = date;
         this.dueDate = dueDate;
-        this.status = status;
+        this.pending = pending;
     }
 
-    public String getTitle() {
+    /***
+     * Constructor creating a new task every time without values.
+     */
+
+    public Task() { }
+
+    /**
+    @Override
+    public String toString() {
+        return "Task{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", project='" + project + '\'' +
+                ", date=" + date +
+                ", dueDate=" + dueDate +
+                ", pending=" + pending +
+                '}';
+    }
+    */
+
+
+    public String getTitle()
+    {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         this.title = title;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
-    public String getProject() {
+    public String getProject()
+    {
         return project;
     }
 
-    public void setProject(String project) {
+    public void setProject(String project)
+    {
         this.project = project;
     }
 
-    public Date getDate() {
+
+    public Date getDate()
+    {
         return date;
     }
 
-    public void setDate(Date date) {
+
+    public void setDate(Date date)
+    {
         this.date = date;
     }
 
-    public LocalDate getDueDate() {
+
+    public LocalDate getDueDate()
+    {
         return dueDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+
+    public void setDueDate(LocalDate dueDate)
+    {
         this.dueDate = dueDate;
     }
 
-    public Boolean getStatus() {
-        return status;
+
+
+
+
+
+    public Boolean getPending()
+    {
+        return pending;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+
+    public void setPending(Boolean pending)
+    {
+        this.pending = pending;
     }
+
+
 }

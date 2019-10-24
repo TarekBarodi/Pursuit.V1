@@ -1,7 +1,3 @@
-import java.awt.*;
-import java.awt.font.GraphicAttribute;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -39,6 +35,9 @@ public class Interface {
      */
     public void start() {
         printWelcome();
+        //reading from the CSV file to load the tacks to arraylist
+        WriterReaderCSV wrCSV = new WriterReaderCSV();
+        taskList = wrCSV.readFromCSV();    // load tasks from files to ArrayList
 
         // Enter the main command loop.  Here we repeatedly read commands and execute them until the user quit.
         boolean finished = false;
@@ -60,6 +59,8 @@ public class Interface {
             printQuitError();
             return false;
         } else {
+            printBye();
+            taskList.saveTasks();
             return true;
         }
     }
@@ -84,10 +85,12 @@ public class Interface {
                 break;
 
             case EDITTASK:
+
                 break;
 
             case SAVEANDQUIT:
                 saveAndQuit(command);
+
                 break;
 
             case HELP:
@@ -114,6 +117,7 @@ public class Interface {
     {
         System.out.println("\n Press (1) to show Task List by Date ");
         System.out.println("\n Press (2) to show Task List by Project ");
+        System.out.println("\n Press any key to go Home ");
         String taskListByDateOrProjectInput = parser.getInput();
         if (taskListByDateOrProjectInput.equals("1"))
         {
@@ -150,8 +154,7 @@ public class Interface {
         }
         else
         {
-            System.out.println("\n Please read the below once again and enter a valid option :) ");
-            showTaskList();
+            printWelcome();
         }
     }
 
@@ -177,13 +180,13 @@ public class Interface {
 
         System.out.println("\n Please enter the Title of the Due Date: ");
         String dueDate = parser.getInput();
-        LocalDate dd = taskList.stringToDate(dueDate);
+        LocalDate dDate = taskList.stringToDate(dueDate);
 
 
         // status pending by default
 
         // calling the addTask method which exist in the taskList
-        taskList.addTask(title, description, project, new Date(), dueDate, false);
+        taskList.addTask(title, description, project, new Date(), dDate, true );
 
         System.out.println("\n The task " + title + " have been successfully added to the list under the " +
                 "project " + project + "\n press (1) to view your tasks otherwise press any key " +
@@ -238,17 +241,20 @@ public class Interface {
     }
 
 
-    public void printUnkown(){
+    public void printUnkown()
+    {
         System.out.println("I don't know what you mean..., Please read the Welcome list and pick one an option");
     }
 
 
-    public void printQuitError() {
+    public void printQuitError()
+    {
         System.out.println("\n Quit as a command word should contain only one word which is Quit");
     }
 
 
-    public void printBye(){
+    public void printBye()
+    {
         System.out.println("Thank you for using Pursuit, Good Bye");
     }
 
