@@ -17,7 +17,6 @@ public class Task implements Serializable
     public String title;
     public String description;
     public String project;
-    public Date date;
     public LocalDate dueDate;
     public Boolean pending = true;
 
@@ -27,17 +26,14 @@ public class Task implements Serializable
      * @param title
      * @param description
      * @param project
-     * @param date
      * @param dueDate
      * @param pending
      */
-
-    public Task(String title, String description, String project, Date date, LocalDate dueDate, Boolean pending)
+    public Task(String title, String description, String project, LocalDate dueDate, Boolean pending)
     {
         this.title = title;
         this.description = description;
         this.project = project;
-        this.date = date;
         this.dueDate = dueDate;
         this.pending = pending;
     }
@@ -94,17 +90,6 @@ public class Task implements Serializable
     }
 
 
-    public Date getDate()
-    {
-        return date;
-    }
-
-
-    public void setDate(Date date)
-    {
-        this.date = date;
-    }
-
 
     public LocalDate getDueDate()
     {
@@ -132,6 +117,8 @@ public class Task implements Serializable
     {
         this.pending = pending;
     }
+
+
 
 
 }

@@ -1,5 +1,8 @@
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.ArrayList;
 
 /**
  * This class is the main class of the "Pursuit" application.
@@ -34,10 +37,11 @@ public class Interface {
      * Main start routine.
      */
     public void start() {
-        printWelcome();
-        //reading from the CSV file to load the tacks to arraylist
+
+        //reading from the CSV file to load the tacks to ArrayList
         WriterReaderCSV wrCSV = new WriterReaderCSV();
-        taskList = wrCSV.readFromCSV();    // load tasks from files to ArrayList
+        taskList = new TaskList();    // load tasks from files to ArrayList
+        printWelcome();
 
         // Enter the main command loop.  Here we repeatedly read commands and execute them until the user quit.
         boolean finished = false;
@@ -49,7 +53,7 @@ public class Interface {
     }
 
 
-    /**
+    /***
      * "Quit" was entered.
      *
      * @return true, if this command quits the game, false otherwise.
@@ -85,11 +89,15 @@ public class Interface {
                 break;
 
             case EDITTASK:
+                taskList.showAllTasks();
+
+
 
                 break;
 
             case SAVEANDQUIT:
                 saveAndQuit(command);
+                System.exit(0);
 
                 break;
 
@@ -103,8 +111,6 @@ public class Interface {
         }
         return wantToQuit;
     }
-
-
 
 
     /**
@@ -178,7 +184,7 @@ public class Interface {
 
         // the date is equal to the creating date
 
-        System.out.println("\n Please enter the Title of the Due Date: ");
+        System.out.println("\n Please enter the Due Date: ");
         String dueDate = parser.getInput();
         LocalDate dDate = taskList.stringToDate(dueDate);
 
@@ -186,7 +192,7 @@ public class Interface {
         // status pending by default
 
         // calling the addTask method which exist in the taskList
-        taskList.addTask(title, description, project, new Date(), dDate, true );
+        taskList.addTask(title, description, project, dDate, true );
 
         System.out.println("\n The task " + title + " have been successfully added to the list under the " +
                 "project " + project + "\n press (1) to view your tasks otherwise press any key " +
@@ -212,7 +218,7 @@ public class Interface {
 
         System.out.println("\n Welcome to Pursuit" +
                 "\n ================== " +
-                "\n You have X tasks todo and Y tasks are done " +
+                "\n You have " + taskList.numOfTasks() + " tasks todo and Y tasks are done " +
                 "\n Pick an option: ");
         System.out.println("\n(" + CommandWord.SHOWTASKLIST + ") Show Task List (by date or project)");
         System.out.println("\n(" + CommandWord.ADDNEWTASK + ") Add New Task");

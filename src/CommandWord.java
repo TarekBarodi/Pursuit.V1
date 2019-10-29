@@ -1,6 +1,9 @@
 
-/*
- * TODO COMMENT
+/**
+ * Representations for all the valid command words for the application along with a string.
+ *
+ * @author  Tarek Barodi
+ * @version 2019
  */
 
 public enum CommandWord {
