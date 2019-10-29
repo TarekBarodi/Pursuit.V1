@@ -64,6 +64,10 @@ public class Parser
     }
 
 
+    /**
+     * This method takes the input from the user
+     * @return
+     */
     public String getInput()
     {
         return reader.nextLine();

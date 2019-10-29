@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Object Serialization class
@@ -8,31 +9,50 @@ import java.io.*;
  */
 public class WriterReaderCSV {
 
-    public void writeToCSV(TaskList taskList) {
+    /**
+     * This method save the data on the CSV file and once the user click on save and quit
+     * @param taskList
+     */
+    public void writeToCSV(ArrayList<Task> taskList) {
 
         try {
-            FileOutputStream fops = new FileOutputStream("/Users/tarekbarodi/Desktop/Pursuit.V1/src/TaskFile.csv");
+            FileOutputStream fops = new FileOutputStream("src/TaskFile.csv");
             ObjectOutputStream oops = new ObjectOutputStream(fops);
             oops.writeObject(taskList);
             oops.flush();
             oops.close();
-        } catch (IOException e) {
+        }
+        catch (EOFException e)
+        {
+            System.out.println("The list is empty, nothing to save");
+            return;
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public TaskList readFromCSV() {
-
+    /**
+     * This method reading the files from the files once the application starts
+     * @return
+     */
+    public ArrayList<Task> readFromCSV() {
+        ArrayList<Task> taskList = new ArrayList<>();
         try{
             FileInputStream fips = new FileInputStream("/Users/tarekbarodi/Desktop/Pursuit.V1/src/TaskFile.csv");
             ObjectInputStream oips = new ObjectInputStream(fips);
-            TaskList taskList = (TaskList) oips.readObject();
+            taskList = (ArrayList<Task>) oips.readObject();
             oips.close();
-            return taskList;
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
         }
+        catch (EOFException e)
+        {
+            System.out.println("the list is empty nothing to show");
+        }
+        catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return taskList;
+
 
     }
 

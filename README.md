@@ -7,3 +7,24 @@ Simply create a new task, assign them a title and due date and choose a project 
 It is a text based user interface via the command-line.
 
 
+The view will like the below:
+
+    Welcome to Pursuit
+     ================== 
+     You have 1 tasks todo and Y tasks are done 
+     Pick an option: 
+    
+    (1) Show Task List (by date or project)
+    
+    (2) Add New Task
+    
+    (3) Edit Task (Update, Mark as done, Remove
+    
+    (4) Save & Quit
+    
+    (5) for Help
+    
+     ============================================ 
+
+
+![](/Users/tarekbarodi/Desktop/Pursuit.V1/Class Diagram...png)
